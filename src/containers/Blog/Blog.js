@@ -8,7 +8,8 @@ import './Blog.css';
 
 class Blog extends Component {
     state = {
-        posts: []
+        posts: [],
+        selectedPostId: null
     }
 
     // Best place in React to make http requests 'componentDidMount' :D
@@ -18,28 +19,34 @@ class Blog extends Component {
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
 
             // will hold only the first four posts from the retrieved data
-            const posts = response.data.slice(0, 4); 
+            const posts = response.data.slice(0, 4);
 
-            const updatedPosts = posts.map( post => {
+            const updatedPosts = posts.map(post => {
                 // adding author to the current information of each updatedPosts
                 return {
-                    ...post, 
+                    ...post,
                     author: 'Mad Marcio'
                 };
             });
 
             this.setState({ posts: updatedPosts });
         } catch {
-            console.log('oops!');
+            console.log('[Blog.js] has something wrong!');
         }
     }
 
+    postSelectedHandler = id => {
+        this.setState({ selectedPostId: id });
+    }
+
     render() {
+
         const posts = this.state.posts.map(post => {
             return <Post
                 key={post.id}
                 title={post.title}
-                author={post.author} />
+                author={post.author}
+                clicked={this.postSelectedHandler.bind(this, post.id)} />
         })
 
         return (
@@ -48,7 +55,7 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.selectedPostId}/>
                 </section>
                 <section>
                     <NewPost />
