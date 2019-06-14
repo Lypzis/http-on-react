@@ -1,72 +1,44 @@
 import React, { Component } from 'react';
-import axios from '../../axios';
+import { Route } from 'react-router-dom';
 
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
+import Posts from './Posts/Posts';
+import NewPost from './NewPost/NewPost';
+//import FullPost from './FullPost/FullPost';
+
 import './Blog.css';
 
 class Blog extends Component {
-    state = {
-        posts: [],
-        selectedPostId: null,
-        error: false
-    }
-
-    // Best place in React to make http requests 'componentDidMount' :D
-    async componentDidMount() {
-        try {
-            // GET request to the API
-            const response = await axios.get('/posts');
-
-            // will hold only the first four posts from the retrieved data
-            const posts = response.data.slice(0, 4);
-
-            const updatedPosts = posts.map(post => {
-                // adding author to the current information of each updatedPosts
-                return {
-                    ...post,
-                    author: 'Mad Marcio'
-                };
-            });
-
-            this.setState({ posts: updatedPosts });
-        } catch (err) {
-            // console.log('[Blog.js] has something wrong! ' + err);
-            this.setState({ error: true });
-        }
-    }
-
-    postSelectedHandler = id => {
-        this.setState({ selectedPostId: id });
-    }
 
     render() {
-        let posts = <p style={{ textAlign: 'center' }}>Sorry, the posts weren't found!</p>
 
-        if (!this.state.error)
-            posts = this.state.posts.map(post => {
-                return <Post
-                    key={post.id}
-                    title={post.title}
-                    author={post.author}
-                    clicked={this.postSelectedHandler.bind(this, post.id)} />
-            });
-
+        // You can use as many Routes in a page as you want
+        // eg: <Route path="/" exact render={() => <h1>Home</h1>}/>
+        //     <Route path="/" exact render={() => <h1>Home 2</h1>}/>
         return (
             <div>
-                <section className="Posts">
-                    {posts}
-                </section>
-                <section>
-                    <FullPost id={this.state.selectedPostId} />
-                </section>
-                <section>
-                    <NewPost />
-                </section>
+                <header>
+                    <nav>
+                        <ul className="Blog__nav-list">
+                            <li className="Blog__nav-list-item"><a href="/" className="Blog__nav-link">Home</a></li>
+                            <li className="Blog__nav-list-item"><a href="/new-post" className="Blog__nav-link">New Post</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <Route path="/" exact render={() => <Posts />}/>
+                <Route path="/new-post" exact render={() => <NewPost />}/>
             </div>
         );
     }
 }
 
 export default Blog;
+
+
+/**
+ * <section>
+                    <FullPost id={this.state.selectedPostId} />
+                </section>
+                <section>
+                    <NewPost />
+                </section>
+ */
