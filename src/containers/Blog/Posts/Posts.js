@@ -13,6 +13,9 @@ class Posts extends Component {
 
     // Best place in React to make http requests 'componentDidMount' :D
     async componentDidMount() {
+
+        //console.log(this.props);
+
         try {
             // GET request to the API
             const response = await axios.get('/posts');
