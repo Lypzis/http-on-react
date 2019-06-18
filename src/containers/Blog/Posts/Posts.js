@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
+import { Link } from 'react-router-dom';
 
 import Post from '../../../components/Post/Post';
 
@@ -47,11 +48,14 @@ class Posts extends Component {
         let posts = <p style={{ textAlign: 'center' }}>Sorry, the posts weren't found!</p>
 
         posts = this.state.posts.map(post => {
-            return <Post
-                key={post.id}
-                title={post.title}
-                author={post.author}
-                clicked={this.postSelectedHandler.bind(this, post.id)} />
+            return ( // in here we use Link to consume the ':name' specified in the <Route>
+                <Link to={`/posts/${post.id}`} key={post.id}>
+                    <Post
+                        title={post.title}
+                        author={post.author}
+                        clicked={this.postSelectedHandler.bind(this, post.id)} />
+                </Link>
+            );
         });
 
         return (
