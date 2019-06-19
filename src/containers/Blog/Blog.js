@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom'; // NavLink instead of just Link is for inline-shit-styles, which I will not add
 
-import Posts from './Posts/Posts';
-import NewPost from './NewPost/NewPost';
-import FullPost from './FullPost/FullPost';
+// Switch will make sure that only one route is shown on the screen
+import { Link } from 'react-router-dom'; // NavLink instead of just Link is for inline-shit-styles, which I will not add
+
+import Routes from '../../components/Routes/Routes';
 
 import './Blog.css';
 
@@ -40,15 +40,7 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-                {/*<Route path="/" exact render={() => <Posts />}/>
-                <Route path="/new-post" exact render={() => <NewPost />}/>*/}
-                <Route path="/" exact component={Posts} />
-                <Route path="/new-post" exact component={NewPost} />
-
-                {/* ':name' is a special dynamic property(route parameter),
-                 since we need to retrieve a specific FullPost */}
-                <Route path="/posts/:id" exact component={FullPost} /> 
-                
+                <Routes />
             </div>
         );
     }

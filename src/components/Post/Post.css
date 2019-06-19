@@ -1,6 +1,6 @@
 .Post {
+    margin: 10px;
     width: 80%;
-    height: 100%;
     padding: 16px;
     text-align: center;
     border: 1px solid #eee;
@@ -10,7 +10,8 @@
 }
 
 .Post:hover,
-.Post:active {
+.Post:active { 
+    color: #fa923f;
     background-color: #C0DDF5;
 }
 

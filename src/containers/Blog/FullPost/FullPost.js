@@ -19,9 +19,6 @@ class FullPost extends Component {
      * become an infinite loop( only in case of 'componentDidUpdate') nor the same post will reaload.
      */
     async componentDidMount() { 
-
-        console.log(this.props);
-
         if (this.props.match.params.id)
             if (!this.state.loadedPost) 
                 try {

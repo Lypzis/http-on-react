@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
-import { Link } from 'react-router-dom';
 
 import Post from '../../../components/Post/Post';
 
@@ -40,21 +39,20 @@ class Posts extends Component {
     }
 
     postSelectedHandler = id => {
-
-        // if one is selected, redirect to the fullpost
+        // this will redirect to a new path and add it to 'history'
+        this.props.history.push({ pathname: `/posts/${id}` });
     }
 
     render() {
         let posts = <p style={{ textAlign: 'center' }}>Sorry, the posts weren't found!</p>
 
         posts = this.state.posts.map(post => {
-            return ( // in here we use Link to consume the ':name' specified in the <Route>
-                <Link to={`/posts/${post.id}`} key={post.id}>
-                    <Post
-                        title={post.title}
-                        author={post.author}
-                        clicked={this.postSelectedHandler.bind(this, post.id)} />
-                </Link>
+            return (
+                <Post
+                    key={post.id}
+                    title={post.title}
+                    author={post.author}
+                    clicked={this.postSelectedHandler.bind(this, post.id)} />
             );
         });
 
