@@ -14,10 +14,12 @@
 
 .Blog__nav-link {
     text-decoration: none;
+    outline: none;
     color: #000;
 } 
 
 .Blog__nav-link:hover,
-.Blog__nav-link:active {
+.Blog__nav-link:active,
+.Blog__nav-link:focus {
     color: #fa923f;
 }

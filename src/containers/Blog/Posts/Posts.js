@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import axios from '../../../axios';
 
 import Post from '../../../components/Post/Post';
+import FullPost from '../FullPost/FullPost';
 
 import './Posts.css';
 
@@ -14,7 +16,7 @@ class Posts extends Component {
     // Best place in React to make http requests 'componentDidMount' :D
     async componentDidMount() {
 
-        //console.log(this.props);
+        console.log(this.props);
 
         try {
             // GET request to the API
@@ -57,9 +59,15 @@ class Posts extends Component {
         });
 
         return (
-            <section className="Posts__topics">
-                {posts}
-            </section>
+            <div>
+                <section className="Posts__topics">
+                    {posts}
+                </section>
+                 {/* ':name' is a special dynamic property(route parameter),
+                        since we need to retrieve a specific FullPost.
+                    Nested route*/}
+                <Route path={`${this.props.match.url}/:id`} exact component={FullPost} />
+            </div>
         );
     }
 }

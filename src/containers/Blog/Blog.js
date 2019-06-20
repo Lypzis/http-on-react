@@ -24,8 +24,8 @@ class Blog extends Component {
                         <ul className="Blog__nav-list">
                             <li className="Blog__nav-list-item">
                                 <Link
-                                    to="/"
-                                    className="Blog__nav-link">Home</Link>
+                                    to="/posts/"
+                                    className="Blog__nav-link">Posts</Link>
                             </li>
                             <li className="Blog__nav-list-item">
                                 <Link
@@ -47,13 +47,3 @@ class Blog extends Component {
 }
 
 export default Blog;
-
-
-/**
- * <section>
-                    <FullPost id={this.state.selectedPostId} />
-                </section>
-                <section>
-                    <NewPost />
-                </section>
- */
