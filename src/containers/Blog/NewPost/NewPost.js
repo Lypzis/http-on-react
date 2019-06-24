@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
+import { Redirect } from 'react-router-dom';
 
 import './NewPost.css';
 
@@ -7,7 +8,8 @@ class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: 'Max'
+        author: 'Max',
+        submitted: false,
     }
 
     componentDidMount() {
@@ -24,15 +26,24 @@ class NewPost extends Component {
         axios.post('/posts', post)
             .then(response => {
                 console.log(response);
+                // after submitting, send back to 'posts' page
+                //this.setState({submitted: true}); // this replaces the current page, there is no coming back
+                // OR 
+                //this.props.history.push('/posts'); // while this pushs a page into the stack, meaning you can go back to that last one with this
+                // OR
+                this.props.history.replace('/posts'); // which is the same as using 'Redirect'
             })
             .catch(err => {
                 console.log('[NewPost.js] has something wrong! ' + err);
             });
     }
 
-    render() {
+    render() { 
+        let redirect = this.state.submitted ? <Redirect to="/posts" /> : null;
+
         return (
             <div className="NewPost">
+                {redirect}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({ title: event.target.value })} />
