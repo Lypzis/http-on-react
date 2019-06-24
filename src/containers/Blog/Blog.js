@@ -9,6 +9,10 @@ import './Blog.css';
 
 class Blog extends Component {
 
+    state = {
+        auth: true
+    }
+
     render() {
 
         // You can use as many Routes in a page as you want
@@ -40,7 +44,7 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-                <Routes />
+                <Routes authenticated={this.state.auth} />
             </div>
         );
     }

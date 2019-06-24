@@ -13,6 +13,9 @@ class NewPost extends Component {
     }
 
     componentDidMount() {
+        // Can also check in here if user is authenticated,
+        // preveting or allowing him to reach this.
+        // If unauth => this.props.history.replace('/posts');
         //console.log(this.props);
     }
 
